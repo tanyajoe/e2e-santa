@@ -1,0 +1,5 @@
+{
+    "notificationsBtn": ".layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > :nth-child(2)",
+    "notificationFirst": ":nth-child(1) > .notifications-item__button > .btn-service"
+    
+}

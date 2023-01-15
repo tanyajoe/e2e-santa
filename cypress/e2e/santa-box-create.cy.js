@@ -5,6 +5,7 @@ const dashboardPage = require("../fixtures/pages/dashboardPage.json");
 const invitePage = require("../fixtures/pages/invitePage.json");
 const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
+const mainPage = require("../fixtures/pages/mainPage.json");
 import { faker } from "@faker-js/faker";
 
 describe("user can create a box and run it", () => {
@@ -93,6 +94,24 @@ describe("user can create a box and run it", () => {
     cy.get('.santa-modal_content_buttons > .btn-main').click();
     cy.contains("Жеребьевка проведена").should('exist');
     
+  })
+
+  it("check notification by user1", () => {
+    cy.visit("/login");
+    cy.login(users.user1.email, users.user1.password);
+    cy.checkNotification();
+  })
+
+  it("check notification by user2", () => {
+    cy.visit("/login");
+    cy.login(users.user2.email, users.user2.password);
+    cy.checkNotification();
+  })
+
+  it("check notification by user3", () => {
+    cy.visit("/login");
+    cy.login(users.user3.email, users.user3.password);
+    cy.checkNotification();
   })
     
 

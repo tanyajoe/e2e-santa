@@ -28,6 +28,7 @@ const loginPage = require("../fixtures/pages/loginPage.json");
 const generalElements = require("../fixtures/pages/general.json");
 const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
+const mainPage = require("../fixtures/pages/mainPage.json");
 
 Cypress.Commands.add("login", (userName, password) => {
   cy.get(loginPage.loginField).type(userName);
@@ -44,22 +45,20 @@ Cypress.Commands.add("approveParticipation", (userName, password, wishes) => {
   cy.get(generalElements.arrowRight).click();
   cy.get(inviteeBoxPage.wishesInput).type(wishes);
   cy.get(generalElements.arrowRight).click();
-
   cy.get(inviteeDashboardPage.noticeForInvitee)
   .invoke("text")
   .then((text) => {
     expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
   });
 cy.clearCookies();
-  //cy.get(inviteeDashboardPage.noticeForInvitee)
-    //.invoke("text")
-    //.then((text) => {
-      //  expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
-    //});
-  //cy.clearCookies();
+});
 
-
-/*   cy.get(loginPage.loginField).type(userName);
-  cy.get(loginPage.passwordField).type(password);
-  cy.get(generalElements.submitButton).click({ force: true }); */
+Cypress.Commands.add("checkNotification", () => {
+  cy.contains("Коробки").should('exist');
+  cy.get(mainPage.notificationsBtn).click();
+  cy.contains("Отметить все как прочитанные").should('exist');
+  cy.get(mainPage.notificationFirst).click();
+  cy.contains("Жеребьевка проведена и у тебя появился подопечный").should('exist');
+  cy.get(generalElements.submitButton).click();
+  cy.contains('oksana').should('exist');
 });
