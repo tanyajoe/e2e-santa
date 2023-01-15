@@ -62,3 +62,15 @@ Cypress.Commands.add("checkNotification", () => {
   cy.get(generalElements.submitButton).click();
   cy.contains('oksana').should('exist');
 });
+
+Cypress.Commands.add('ApiDeleteBox', (ApiUrl) =>{
+  cy.request({
+    method: "DELETE",
+    headers: {
+        Cookie: "_ym_uid=1673040386524679934; _ym_d=1673040386; _ym_isad=1; connect.sid=s:UoauwBVdVGFLfeTCofEk_Vbh6Y3fORvj.pqV3Wwaai9rLTDKWHKvHwh74ntieOP0BjYnShvc6xKA; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDA3NTYsImlhdCI6MTY3Mzc1MDA3NywiZXhwIjoxNjczNzUzNjc3fQ.UWfum_s7ZzML5OJPOBThQj6iuh9how9qPcIbX6zwcmU"
+    },
+    url: ApiUrl
+}).then((response) => {
+    expect(response.status).to.equal(200);
+})
+})
