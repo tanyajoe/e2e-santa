@@ -63,57 +63,21 @@ describe("user can create a box and run it", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
-    cy.login(users.user1.email, users.user1.password);
-    cy.contains("Создать карточку участника").should("exist");
-    cy.get(generalElements.submitButton).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeBoxPage.wishesInput).type(wishes);
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeDashboardPage.noticeForInvitee)
-      .invoke("text")
-      .then((text) => {
-        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
-      });
-    cy.clearCookies();
+    cy.approveParticipation(users.user1.email, users.user1.password, wishes);
   });
 
   it("approve as user2", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
-    cy.login(users.user2.email, users.user2.password);
-    cy.contains("Создать карточку участника").should("exist");
-    cy.get(generalElements.submitButton).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeBoxPage.wishesInput).type(wishes);
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeDashboardPage.noticeForInvitee)
-      .invoke("text")
-      .then((text) => {
-        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
-      });
-    cy.clearCookies();
+    cy.approveParticipation(users.user2.email, users.user2.password, wishes);
   });
 
   it("approve as user3", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
-    cy.login(users.user3.email, users.user3.password);
-    cy.contains("Создать карточку участника").should("exist");
-    cy.get(generalElements.submitButton).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeBoxPage.wishesInput).type(wishes);
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeDashboardPage.noticeForInvitee)
-      .invoke("text")
-      .then((text) => {
-        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
-      });
-    cy.clearCookies();
+    cy.approveParticipation(users.user3.email, users.user3.password, wishes);
   });
 
   after("delete box", () => {
