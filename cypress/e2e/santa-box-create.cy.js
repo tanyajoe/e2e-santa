@@ -80,7 +80,25 @@ describe("user can create a box and run it", () => {
     cy.approveParticipation(users.user3.email, users.user3.password, wishes);
   });
 
-  after("delete box", () => {
+  it("start lottery from the box", () => {
+    cy.visit("/login");
+    cy.login(users.userAutor.email, users.userAutor.password);
+    cy.contains("Коробки").should('exist').click({ force: true });
+    cy.contains(newBoxName).should('exist').click({ force: true });
+    cy.contains("Перейти к жеребьевке").should('exist').click({ force: true });
+    cy.contains("Провести жеребьевку").should('exist');
+    cy.contains("Жеребьевка").should('exist');
+    cy.get(generalElements.submitButton).click();
+    cy.get('.santa-modal_content_message').should('exist');
+    cy.get('.santa-modal_content_buttons > .btn-main').click();
+    cy.contains("Жеребьевка проведена").should('exist');
+    
+  })
+    
+
+
+
+/*   after("delete box", () => {
     cy.visit("/login");
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.get(
@@ -95,5 +113,7 @@ describe("user can create a box and run it", () => {
       "Удалить коробку"
     );
     cy.get(".btn-service").click();
-  });
+  }); */
+
+
 });
