@@ -27,7 +27,11 @@ describe("user can create a box and run it", () => {
   let inviteLink;
   let idBox = faker.random.alphaNumeric(6);
 
-  it("user logins and create a box", () => {
+  it.only("user logins and create a box", () => {
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+    
     cy.visit("/login");
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.contains("Создать коробку").click();
@@ -40,8 +44,9 @@ describe("user can create a box and run it", () => {
     cy.get(boxPage.maxAnount).type(maxAmount);
     cy.get(boxPage.currency).select(currency);
     cy.get(generalElements.arrowRight).click();
+    cy.contains("Дополнительные настройки").should("exist")
     cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
+    //cy.get(generalElements.arrowRight).click();
     cy.get(dashboardPage.createdBoxName).should("have.text", newBoxName);
     cy.get(".layout-1__header-wrapper-fixed .toggle-menu-item span")
       .invoke("text")

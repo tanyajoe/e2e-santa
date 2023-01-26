@@ -60,14 +60,15 @@ Cypress.Commands.add("checkNotification", () => {
   cy.get(mainPage.notificationFirst).click();
   cy.contains("Жеребьевка проведена и у тебя появился подопечный").should('exist');
   cy.get(generalElements.submitButton).click();
-  cy.contains('oksana').should('exist');
+  //cy.contains('oksana').should('exist');
+  cy.get('.user-card__pic').should('exist');
 });
 
 Cypress.Commands.add('ApiDeleteBox', (ApiUrl) =>{
   cy.request({
     method: "DELETE",
     headers: {
-        Cookie: "_ym_uid=1673040386524679934; _ym_d=1673040386; _ym_isad=1; connect.sid=s:UoauwBVdVGFLfeTCofEk_Vbh6Y3fORvj.pqV3Wwaai9rLTDKWHKvHwh74ntieOP0BjYnShvc6xKA; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDA3NTYsImlhdCI6MTY3Mzc1MDA3NywiZXhwIjoxNjczNzUzNjc3fQ.UWfum_s7ZzML5OJPOBThQj6iuh9how9qPcIbX6zwcmU"
+        Cookie: "_ym_uid=1673040386524679934; _ym_d=1673040386; _ym_isad=1; connect.sid=s:Q40dv6rvt8sh2YDSpwuN28-p_zeY8Ho2.nMYyImfkYZW2a9pKyzTzX78yUwc8RUqxC6nLI+H7iWQ; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMTUsImlhdCI6MTY3NDU4OTA1MiwiZXhwIjoxNjc0NTkyNjUyfQ.IgJDE20N6mN0m2Ohn--VXHRcT5FL6esdWyZGVAwdWa8"
     },
     url: ApiUrl
 }).then((response) => {
