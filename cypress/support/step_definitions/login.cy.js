@@ -106,3 +106,7 @@ Given("box is visible", function () {
         cy.checkNotification();
         });
 
+     Given("boxes are available", function () {
+       cy.contains("Коробки").should('exist')
+        });
+

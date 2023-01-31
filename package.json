@@ -5,7 +5,14 @@
   "main": "cypress.config.js",
   "scripts": {
     "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run:cloud": "npx cypress run --record --key cace34b3-ddcb-4ed7-a5c0-55741ab4c05d",
+    "cy:spec1": "npx cypress run --config-file cypress.config.js --spec cypress/e2e/test/* --record --key cace34b3-ddcb-4ed7-a5c0-55741ab4c05d",
+    "cy:spec2": "npx cypress run --config-file cypress-login.config.js --spec cypress/e2e/login/* --record --key cace34b3-ddcb-4ed7-a5c0-55741ab4c05d",
+    "cy:spec1:nokey": "npx cypress run --spec cypress/e2e/test/lottery.feature",
+    "cy:spec2:nokey": "npx cypress run --spec cypress/e2e/login/logins.feature",
+    "cy:nokey:parallel": "npm run cy:spec1:nokey -- --browser chrome & npm run cy:spec2:nokey -- --browser electron",
+    "cy:parallel": "npm run cy:spec1 -- --browser chrome --group chrome --ci-build-id 16 --parallel & npm run cy:spec2 -- --browser electron --group electron --ci-build-id 16 --parallel"
   },
   "author": "",
   "license": "ISC",
