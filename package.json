@@ -12,16 +12,24 @@
     "cy:spec1:nokey": "npx cypress run --spec cypress/e2e/test/lottery.feature",
     "cy:spec2:nokey": "npx cypress run --spec cypress/e2e/login/logins.feature",
     "cy:nokey:parallel": "npm run cy:spec1:nokey -- --browser chrome & npm run cy:spec2:nokey -- --browser electron",
-    "cy:parallel": "npm run cy:spec1 -- --browser chrome --group chrome --ci-build-id 16 --parallel & npm run cy:spec2 -- --browser electron --group electron --ci-build-id 16 --parallel"
+    "cy:parallel": "npm run cy:spec1 -- --browser chrome --group chrome --ci-build-id 16 --parallel & npm run cy:spec2 -- --browser electron --group electron --ci-build-id 16 --parallel",
+    "allure:get:results": "cypress run --env allure=true",
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "allure:open:report": "allure open",
+    "delete:reports": "rm -R -f allure-report/* && rm -R -f allure-results/*"
+   
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.2",
-    "@faker-js/faker": "^7.6.0",
-    "cypress": "^12.2.0"
+    "@faker-js/faker": "^7.6.0"
   },
   "devDependencies": {
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5"
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "@shelex/cypress-allure-plugin": "^2.35.2",
+    "allure-cucumberjs": "^2.0.0-beta.26",
+    "allure-js-commons": "^2.0.0-beta.26",
+    "cypress": "^12.5.1"
   }
 }

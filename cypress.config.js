@@ -4,6 +4,7 @@ const createEsbuildPlugin =
   require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 const addCucumberPreprocessorPlugin =
   require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
+const allureWriter = require("@shelex/cypress-allure-plugin/writer");
 
 module.exports = defineConfig({
   projectId: "jmvpif",
@@ -13,6 +14,8 @@ module.exports = defineConfig({
     testIsolation: false,
     specPattern: "**/*.feature",
     setupNodeEvents(on, config) {
+      //on("file:preprocessor", webpackPreprocessor);
+      allureWriter(on, config);
       // implement node event listeners here
       const bundler = createBundler({
         plugins: [createEsbuildPlugin(config)],
@@ -23,7 +26,11 @@ module.exports = defineConfig({
 
       return config;
     },
+
+    env: {
+      allureReuseAfterSpec: true,
+    },
   },
   viewportHeight: 768,
-  viewportWidth: 1366
+  viewportWidth: 1366,
 });
